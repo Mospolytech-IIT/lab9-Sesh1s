@@ -1,0 +1,58 @@
+### Добавление данных:
+
+### 1 задание - Создание пользователей
+POST http://localhost:8000/users/
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "email": "user1@yandex.ru",
+  "password": "password123"
+}
+
+### 2 задание - Создание поста
+POST http://localhost:8000/posts/
+Content-Type: application/json
+
+{
+  "title": "post1",
+  "content": "content231223131",
+  "user_id": 1
+}
+
+### Извлечение данных:
+
+### 3 задание - Получение всех пользователей
+GET http://localhost:8000/users/
+
+### 4 задание - Получение всех постов
+GET http://localhost:8000/posts
+
+### 5 задание - Получение поста по ID
+GET http://localhost:8000/posts/1
+
+### Обновление данных:
+
+### 6 задание - Обновление email пользователя
+PUT http://localhost:8000/users/1/
+Content-Type: application/json
+
+{
+  "email": "newemail1@example.com"
+}
+
+### 7 задание - Обновление контента поста
+PUT http://localhost:8000/posts/1
+Content-Type: application/json
+
+{
+  "content": "Updated content"
+}
+
+### Удаление данных:
+
+### 8 задание - Удаление поста
+DELETE http://localhost:8000/posts/1
+
+### 9 задание - Удаление пользователя и его постов
+DELETE http://localhost:8000/users/1

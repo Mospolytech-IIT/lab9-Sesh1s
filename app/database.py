@@ -7,7 +7,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # URL подключения к базе данных PostgreSQL
-DATABASE_URL = "postgresql+psycopg2://username:password@localhost/dbname"
+DATABASE_URL = "postgresql://postgres:root@localhost:5432/postgres"
 
 # Настройки подключения и создание движка
 engine = create_engine(DATABASE_URL)

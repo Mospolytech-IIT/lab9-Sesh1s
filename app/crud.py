@@ -1,4 +1,7 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session
+from app import models, schemas
+from . import models
 from .models import User, Post
 
 # Добавление нового пользователя
@@ -25,14 +28,35 @@ def get_all_users(db: Session):
 def get_all_posts(db: Session):
     return db.query(Post).all()
 
+# Получение поста и пользователя по id
+def get_user_by_id(db: Session, user_id: int):
+    return db.query(models.User).filter(models.User.id == user_id).first()
+
+def get_post_by_id(db: Session, post_id: int):
+    return db.query(models.Post).filter(models.Post.id == post_id).first()
+
+# Обновление контента
+def update_post_content(db: Session, post_id: int, post: schemas.PostUpdate):
+    db_post = db.query(models.Post).filter(models.Post.id == post_id).first()
+    if db_post:
+        if post.title is not None:
+            db_post.title = post.title
+        if post.content is not None:
+            db_post.content = post.content
+        db.commit()
+        db.refresh(db_post)
+        return db_post
+    return None
+
 # Обновление email пользователя
 def update_user_email(db: Session, user_id: int, new_email: str):
-    db_user = db.query(User).filter(User.id == user_id).first()
-    if db_user:
-        db_user.email = new_email
+    user = db.query(models.User).filter(models.User.id == user_id).first()
+    if user:
+        user.email = new_email
         db.commit()
-        db.refresh(db_user)
-    return db_user
+        db.refresh(user)
+        return user
+    return None
 
 # Удаление поста
 def delete_post(db: Session, post_id: int):
